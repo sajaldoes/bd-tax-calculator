@@ -4,7 +4,7 @@ Free Bangladesh tax calculator for income year 2025-2026. Calculate income tax, 
 
 ## 🚀 Live Demo
 
-**[https://sajaldoes.github.io/bd-tax-calculator.github.io](https://sajaldoes.github.io/bd-tax-calculator.github.io)**
+**[https://sajaldoes.github.io/bd-tax-calculator](https://sajaldoes.github.io/bd-tax-calculator)**
 
 ## Features
 
@@ -28,7 +28,7 @@ Open `index.html` in any modern web browser.
 
 ## Contributing
 
-Contributions welcome! Visit the [GitHub repository](https://github.com/sajaldoes/bd-tax-calculator.github.io) to contribute.
+Contributions welcome! Visit the [GitHub repository](https://github.com/sajaldoes/bd-tax-calculator) to contribute.
 
 ## Disclaimer
 
