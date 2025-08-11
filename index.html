@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Tax Calculator 2025-26 | Bangladesh Income Tax, TDS & Investment Rebate Calculator</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free Bangladesh Tax Calculator for 2025-2026. Calculate income tax, monthly TDS, and investment rebates for Male, Female, Third Gender, and Freedom Fighter categories. Accurate progressive tax calculations with comprehensive analysis.">
+    <meta name="keywords" content="bd tax calculator, Bangladesh tax calculator, income tax calculator bd, tax calculator bangladesh, bangladesh income tax calculator 2025-26, bd tax calculator 2025, TDS calculator bangladesh, tax slab calculator bd, NBR tax calculator, investment rebate calculator, tax planning bangladesh, progressive tax calculator, monthly TDS calculator, bd income tax, bangladesh tax slab, freedom fighter tax calculator, female tax calculator bangladesh">
+    <meta name="author" content="Sajal Das">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="theme-color" content="#10b981">
+    <link rel="canonical" href="https://sajaldoes.github.io/bd-tax-calculator.github.io/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sajaldoes.github.io/bd-tax-calculator.github.io/">
+    <meta property="og:title" content="Bangladesh Tax Calculator 2025-26 | Free Income Tax & TDS Calculator">
+    <meta property="og:description" content="Calculate your Bangladesh income tax, monthly TDS, and investment rebates for 2025-2026. Supports all taxpayer categories with accurate progressive tax calculations.">
+    <meta property="og:image" content="https://sajaldoes.github.io/bd-tax-calculator.github.io/og-image.png">
+    <meta property="og:site_name" content="Bangladesh Tax Calculator">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sajaldoes.github.io/bd-tax-calculator.github.io/">
+    <meta property="twitter:title" content="Bangladesh Tax Calculator 2025-26">
+    <meta property="twitter:description" content="Free tool to calculate Bangladesh income tax, TDS, and investment rebates for 2025-2026. Progressive tax system with detailed analysis.">
+    <meta property="twitter:image" content="https://sajaldoes.github.io/bd-tax-calculator.github.io/og-image.png">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="BD">
+    <meta name="geo.country" content="Bangladesh">
+    <meta name="application-name" content="BD Tax Calculator">
+    <meta name="msapplication-TileColor" content="#10b981">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' rx='2' fill='%2310b981' stroke='%23065f46' stroke-width='1'/%3E%3Ctext x='16' y='13' text-anchor='middle' font-family='Arial,sans-serif' font-size='8' font-weight='bold' fill='white'%3E৳%3C/text%3E%3Crect x='6' y='16' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='12' y='16' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='18' y='16' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='6' y='20' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='12' y='20' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='18' y='20' width='4' height='6' fill='%23059669' rx='1'/%3E%3Crect x='6' y='24' width='4' height='2' fill='white' rx='1'/%3E%3Crect x='12' y='24' width='4' height='2' fill='white' rx='1'/%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <header class="text-center mb-10">
+            <div class="flex items-center justify-center mb-4">
+                <div class="text-6xl text-emerald-600 mr-4 flex items-center justify-center w-16 h-16 bg-emerald-50 rounded-full">
+                    ৳
+                </div>
+                <div class="text-left">
+                    <h1 class="text-4xl font-bold text-gray-900">Bangladesh Tax Calculator</h1>
+                    <p class="text-lg text-gray-600 mt-1">Income Year 2025-2026</p>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Input Section -->
+            <section class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-coins text-emerald-600 mr-3"></i>
+                    Income Details
+                </h2>
+                
+                <div class="mb-6">
+                    <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                        <label class="flex items-center bg-gray-50 px-4 py-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                            <input type="radio" name="inputMode" value="monthly" checked class="mr-3 text-emerald-600 focus:ring-emerald-500">
+                            <span class="font-medium">Single Monthly Salary</span>
+                        </label>
+                        <label class="flex items-center bg-gray-50 px-4 py-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                            <input type="radio" name="inputMode" value="manual" class="mr-3 text-emerald-600 focus:ring-emerald-500">
+                            <span class="font-medium">Manual 12 Months Entry</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="monthlyInput" class="salary-input-mode">
+                    <div class="mb-6">
+                        <label for="monthlySalary" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-money-bill-wave text-emerald-600 mr-2"></i>
+                            Monthly Salary (BDT)
+                        </label>
+                        <input type="number" id="monthlySalary" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-lg"
+                               placeholder="Enter your monthly salary" min="0">
+                    </div>
+                </div>
+                
+                <div id="manualInput" class="salary-input-mode hidden">
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                            <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                            Income Year: July 2025 - June 2026
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">July 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="7" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">August 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="8" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">September 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="9" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">October 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="10" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">November 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="11" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">December 2025</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="12" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">January 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="1" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">February 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="2" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">March 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="3" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">April 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="4" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">May 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="5" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">June 2026</label>
+                            <input type="number" class="monthly-salary w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   data-month="6" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 flex justify-between items-center">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">Average Monthly</p>
+                            <p class="text-xl font-semibold text-gray-900" id="avgMonthly">৳0</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">Total 12 Months</p>
+                            <p class="text-xl font-semibold text-gray-900" id="total12Months">৳0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user text-emerald-600 mr-2"></i>
+                        Taxpayer Category
+                    </label>
+                    <select id="category" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="male">Male (below 65 years)</option>
+                        <option value="female">Female or 65+ years (any gender)</option>
+                        <option value="third_gender">Third Gender</option>
+                        <option value="freedom_fighter">Freedom Fighter</option>
+                    </select>
+                </div>
+                
+                <button id="calculateBtn" class="w-full bg-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center">
+                    <i class="fas fa-calculator mr-2"></i>
+                    Calculate Tax
+                </button>
+            </section>
+            
+            <!-- Results Section -->
+            <section id="results" class="hidden">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-pie text-emerald-600 mr-3"></i>
+                    Tax Calculation Results
+                </h2>
+                
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Income Summary Card -->
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition-transform">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-wallet text-4xl opacity-80"></i>
+                            <span class="text-sm font-medium opacity-90">Income Summary</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Total Annual Income
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Monthly salary × 13 months (includes 1 festival bonus) or sum of 12 months + average monthly bonus."></i>
+                                </p>
+                                <p class="text-2xl font-bold" id="totalIncome">৳0</p>
+                            </div>
+                            <div>
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Taxable Income
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="According to Bangladesh tax law, 2/3 of total income is considered taxable."></i>
+                                </p>
+                                <p class="text-2xl font-bold" id="taxableIncome">৳0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Investment Rebate Card -->
+                    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition-transform">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-piggy-bank text-4xl opacity-80"></i>
+                            <span class="text-sm font-medium opacity-90">Investment Rebate</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Possible Rebate
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Maximum rebate is 3% of your taxable income, capped at 10 lac BDT. This rebate reduces your final tax liability."></i>
+                                </p>
+                                <p class="text-2xl font-bold" id="maxRebate">৳0</p>
+                            </div>
+                            <div>
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Min. Investment Needed
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Minimum investment amount needed to get the maximum possible rebate (rebate ÷ rebate rate)."></i>
+                                </p>
+                                <p class="text-xl font-bold" id="minInvestment">৳0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tax Details Card -->
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition-transform">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-receipt text-4xl opacity-80"></i>
+                            <span class="text-sm font-medium opacity-90">Tax Details</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Total Tax
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Total annual tax before applying any investment rebates."></i>
+                                </p>
+                                <p class="text-2xl font-bold" id="totalTax">৳0</p>
+                            </div>
+                            <div class="bg-white/20 rounded-lg p-2">
+                                <p class="text-sm opacity-90 flex items-center">
+                                    Monthly TDS
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Monthly Tax Deducted at Source = (Total Tax - Investment Rebate) ÷ 12 months."></i>
+                                </p>
+                                <p class="text-2xl font-bold" id="monthlyTDS">৳0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comprehensive Tax Slab Table -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-chart-line text-emerald-600 mr-3"></i>
+                        Comprehensive Tax Slab Analysis
+                    </h3>
+                    <div class="mb-6">
+                        <p class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-emerald-400">
+                            <i class="fas fa-info-circle text-emerald-600 mr-2"></i>
+                            Complete breakdown showing income ranges from ৳0 to your total taxable income, with tax rates, eligible amounts, and tax calculations for each slab.
+                        </p>
+                    </div>
+                    
+                    <!-- Tax Slab Summary Table -->
+                    <div id="taxSlabSummary" class="mb-8"></div>
+                </div>
+                
+                <!-- Investment Check Section -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-search-dollar text-emerald-600 mr-3"></i>
+                        Check Your Investment
+                    </h3>
+                    
+                    <!-- Investment Types -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium text-gray-700 mb-4">Investment Categories</h4>
+                        <div class="space-y-4">
+                            <!-- Sanchaypatra & Government Bonds -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" class="investment-type mr-3 text-emerald-600 focus:ring-emerald-500" data-rate="0.10">
+                                        <span class="font-medium">Sanchaypatra & Government Bonds</span>
+                                        <span class="ml-2 text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">10% Rebate</span>
+                                    </label>
+                                </div>
+                                <input type="number" class="investment-amount w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                       placeholder="Enter amount (BDT)" min="0" disabled>
+                            </div>
+                            
+                            <!-- DPS, Stock Market & Mutual Fund -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" class="investment-type mr-3 text-emerald-600 focus:ring-emerald-500" data-rate="0.15">
+                                        <span class="font-medium">DPS, Stock Market & Mutual Fund</span>
+                                        <span class="ml-2 text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">15% Rebate</span>
+                                    </label>
+                                </div>
+                                <input type="number" class="investment-amount w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                       placeholder="Enter amount (BDT)" min="0" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <button id="checkInvestmentBtn" class="bg-indigo-600 text-white py-3 px-8 rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Calculate Investment Rebate
+                        </button>
+                    </div>
+                    <div id="investmentResult" class="mt-6"></div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="mt-12 pb-8">
+            <!-- Built With Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center flex items-center justify-center">
+                    <i class="fas fa-code text-emerald-600 mr-2"></i>
+                    Built With
+                </h3>
+                <div class="flex flex-wrap justify-center gap-4 mb-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                        <i class="fab fa-html5 mr-2"></i>HTML5
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        <i class="fab fa-css3-alt mr-2"></i>CSS3 + Tailwind
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                        <i class="fab fa-js-square mr-2"></i>Vanilla JavaScript
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        <i class="fas fa-icons mr-2"></i>Font Awesome
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                        <i class="fas fa-chart-pie mr-2"></i>Chart.js
+                    </span>
+                </div>
+                
+                <!-- Contribution Button -->
+                <div class="text-center">
+                    <a href="https://github.com/sajaldoes/bd-tax-calculator.github.io" 
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors shadow-lg">
+                        <i class="fab fa-github mr-2"></i>
+                        Contribute on GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Disclaimer -->
+            <p class="text-gray-600 flex items-center justify-center text-center">
+                <i class="fas fa-info-circle text-emerald-600 mr-2"></i>
+                This calculator is based on Bangladesh Income Tax rates for 2025-2026
+            </p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
