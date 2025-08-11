@@ -89,9 +89,9 @@ const monthlyInputs = document.querySelectorAll('.monthly-salary');
 const investmentTypeCheckboxes = document.querySelectorAll('.investment-type');
 const investmentAmountInputs = document.querySelectorAll('.investment-amount');
 
-// Format currency with universal taka symbol
+// Format currency with universal taka icon
 function formatCurrency(amount) {
-    return `<span class="taka-symbol"><span class="taka-icon">৳</span>${amount.toLocaleString('en-US')}</span>`;
+    return `<span class="taka-symbol"><i class="fa-solid fa-bangladeshi-taka-sign taka-icon"></i>${amount.toLocaleString('en-US')}</span>`;
 }
 
 // Handle input mode change
@@ -107,16 +107,34 @@ inputModeRadios.forEach(radio => {
     });
 });
 
-// Update year information text
+// Update year information text and manual month labels
 function updateYearInfo() {
     const year = incomeYearSelect.value;
     const yearInfoText = document.getElementById('yearInfoText');
     
     if (year === '2025-26') {
         yearInfoText.textContent = 'Income Year: July 2025 - June 2026';
+        updateManualMonthLabels(2025, 2026);
     } else if (year === '2024-25') {
         yearInfoText.textContent = 'Income Year: July 2024 - June 2025';
+        updateManualMonthLabels(2024, 2025);
     }
+}
+
+// Update manual month labels based on income year
+function updateManualMonthLabels(startYear, endYear) {
+    const monthNames = [
+        'July', 'August', 'September', 'October', 'November', 'December',
+        'January', 'February', 'March', 'April', 'May', 'June'
+    ];
+    
+    const monthlyInputs = document.querySelectorAll('.monthly-salary');
+    monthlyInputs.forEach((input, index) => {
+        const label = input.parentElement.querySelector('label');
+        const isSecondHalf = index >= 6; // January to June are in the second half
+        const year = isSecondHalf ? endYear : startYear;
+        label.textContent = `${monthNames[index]} ${year}`;
+    });
 }
 
 // Handle income year change
@@ -187,21 +205,31 @@ function calculateTax(income, category, year) {
     return { totalTax: tax, breakdown };
 }
 
-// Create comprehensive tax slab summary table
+// Create enhanced tax slab summary table with visuals
 function createTaxSlabSummary(category, totalTaxableIncome, year) {
     const slabs = taxSlabs[year][category];
     const summaryDiv = document.getElementById('taxSlabSummary');
     
+    // Get color for tax rate
+    const getRateColor = (rate) => {
+        if (rate === 0) return 'bg-gray-100 text-gray-700';
+        if (rate <= 0.05) return 'bg-green-100 text-green-700';
+        if (rate <= 0.15) return 'bg-blue-100 text-blue-700';
+        if (rate <= 0.20) return 'bg-yellow-100 text-yellow-700';
+        if (rate <= 0.25) return 'bg-orange-100 text-orange-700';
+        return 'bg-red-100 text-red-700';
+    };
+    
     let summaryHTML = `
         <div class="overflow-x-auto">
-            <table class="w-full border-collapse border border-gray-300 rounded-lg">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Income Range</th>
-                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tax Rate</th>
-                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Your Eligible Amount</th>
-                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Tax on This Slab</th>
-                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+            <table class="w-full border-collapse rounded-lg overflow-hidden shadow-sm">
+                <thead>
+                    <tr class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white">
+                        <th class="px-6 py-4 text-left font-semibold">Income Range</th>
+                        <th class="px-6 py-4 text-center font-semibold">Tax Rate</th>
+                        <th class="px-6 py-4 text-right font-semibold">Your Eligible Amount</th>
+                        <th class="px-6 py-4 text-right font-semibold">Tax on This Slab</th>
+                        <th class="px-6 py-4 text-center font-semibold">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -211,35 +239,67 @@ function createTaxSlabSummary(category, totalTaxableIncome, year) {
         let eligibleAmount = 0;
         let taxOnSlab = 0;
         let status = '';
+        let statusIcon = '';
         let statusClass = '';
         
         if (totalTaxableIncome > slab.min) {
             eligibleAmount = Math.min(totalTaxableIncome - slab.min, slab.max - slab.min);
             taxOnSlab = eligibleAmount * slab.rate;
             status = eligibleAmount > 0 ? 'Applied' : 'Not Applied';
+            statusIcon = eligibleAmount > 0 ? 'fas fa-check-circle' : 'fas fa-minus-circle';
             statusClass = eligibleAmount > 0 ? 'text-green-600 bg-green-50' : 'text-gray-500 bg-gray-50';
         } else {
             status = 'Not Reached';
+            statusIcon = 'fas fa-clock';
             statusClass = 'text-gray-400 bg-gray-50';
         }
         
         const rangeText = slab.max === Infinity ? `${formatCurrency(slab.min)} and above` : `${formatCurrency(slab.min)} - ${formatCurrency(slab.max)}`;
+        const rateColor = getRateColor(slab.rate);
+        const rowBg = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
         
         summaryHTML += `
-            <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
-                <td class="border border-gray-300 px-4 py-3">${rangeText}</td>
-                <td class="border border-gray-300 px-4 py-3 font-semibold">${(slab.rate * 100).toFixed(0)}%</td>
-                <td class="border border-gray-300 px-4 py-3 font-medium">${formatCurrency(eligibleAmount)}</td>
-                <td class="border border-gray-300 px-4 py-3 font-medium text-purple-600">${formatCurrency(taxOnSlab)}</td>
-                <td class="border border-gray-300 px-4 py-3">
-                    <span class="px-2 py-1 rounded-full text-xs font-medium ${statusClass}">${status}</span>
+            <tr class="${rowBg} hover:bg-blue-50 transition-colors duration-200">
+                <td class="px-6 py-4 font-medium text-gray-900">${rangeText}</td>
+                <td class="px-6 py-4 text-center">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${rateColor}">
+                        ${(slab.rate * 100).toFixed(0)}%
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-right font-semibold text-gray-900">${formatCurrency(eligibleAmount)}</td>
+                <td class="px-6 py-4 text-right font-bold text-purple-600">${formatCurrency(taxOnSlab)}</td>
+                <td class="px-6 py-4 text-center">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusClass}">
+                        <i class="${statusIcon} mr-1"></i>
+                        ${status}
+                    </span>
                 </td>
             </tr>
         `;
     });
     
+    // Calculate total tax
+    const totalTax = slabs.reduce((total, slab) => {
+        if (totalTaxableIncome > slab.min) {
+            const eligibleAmount = Math.min(totalTaxableIncome - slab.min, slab.max - slab.min);
+            return total + (eligibleAmount * slab.rate);
+        }
+        return total;
+    }, 0);
+    
     summaryHTML += `
                 </tbody>
+                <tfoot>
+                    <tr class="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+                        <td colspan="3" class="px-6 py-4 text-lg font-bold">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Total Annual Tax (without rebate)
+                        </td>
+                        <td class="px-6 py-4 text-right text-xl font-bold">${formatCurrency(totalTax)}</td>
+                        <td class="px-6 py-4 text-center">
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     `;
@@ -474,4 +534,9 @@ investmentAmountInputs.forEach(input => {
             checkInvestment();
         }
     });
+});
+
+// Initialize manual month labels on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateYearInfo();
 });
