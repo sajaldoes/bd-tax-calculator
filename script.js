@@ -1,42 +1,83 @@
-// Tax slab data for Bangladesh 2025-2026
+// Tax slab data for Bangladesh
 const taxSlabs = {
-    male: [
-        { min: 0, max: 375000, rate: 0 },
-        { min: 375000, max: 675000, rate: 0.10 },
-        { min: 675000, max: 1075000, rate: 0.15 },
-        { min: 1075000, max: 1575000, rate: 0.20 },
-        { min: 1575000, max: 3575000, rate: 0.25 },
-        { min: 3575000, max: Infinity, rate: 0.30 }
-    ],
-    female: [
-        { min: 0, max: 425000, rate: 0 },
-        { min: 425000, max: 725000, rate: 0.10 },
-        { min: 725000, max: 1125000, rate: 0.15 },
-        { min: 1125000, max: 1625000, rate: 0.20 },
-        { min: 1625000, max: 3625000, rate: 0.25 },
-        { min: 3625000, max: Infinity, rate: 0.30 }
-    ],
-    third_gender: [
-        { min: 0, max: 500000, rate: 0 },
-        { min: 500000, max: 675000, rate: 0.10 },
-        { min: 675000, max: 1075000, rate: 0.15 },
-        { min: 1075000, max: 1575000, rate: 0.20 },
-        { min: 1575000, max: 3575000, rate: 0.25 },
-        { min: 3575000, max: Infinity, rate: 0.30 }
-    ],
-    freedom_fighter: [
-        { min: 0, max: 525000, rate: 0 },
-        { min: 525000, max: 675000, rate: 0.10 },
-        { min: 675000, max: 1075000, rate: 0.15 },
-        { min: 1075000, max: 1575000, rate: 0.20 },
-        { min: 1575000, max: 3575000, rate: 0.25 },
-        { min: 3575000, max: Infinity, rate: 0.30 }
-    ]
+    '2025-26': {
+        male: [
+            { min: 0, max: 375000, rate: 0 },
+            { min: 375000, max: 675000, rate: 0.10 },
+            { min: 675000, max: 1075000, rate: 0.15 },
+            { min: 1075000, max: 1575000, rate: 0.20 },
+            { min: 1575000, max: 3575000, rate: 0.25 },
+            { min: 3575000, max: Infinity, rate: 0.30 }
+        ],
+        female: [
+            { min: 0, max: 425000, rate: 0 },
+            { min: 425000, max: 725000, rate: 0.10 },
+            { min: 725000, max: 1125000, rate: 0.15 },
+            { min: 1125000, max: 1625000, rate: 0.20 },
+            { min: 1625000, max: 3625000, rate: 0.25 },
+            { min: 3625000, max: Infinity, rate: 0.30 }
+        ],
+        third_gender: [
+            { min: 0, max: 500000, rate: 0 },
+            { min: 500000, max: 675000, rate: 0.10 },
+            { min: 675000, max: 1075000, rate: 0.15 },
+            { min: 1075000, max: 1575000, rate: 0.20 },
+            { min: 1575000, max: 3575000, rate: 0.25 },
+            { min: 3575000, max: Infinity, rate: 0.30 }
+        ],
+        freedom_fighter: [
+            { min: 0, max: 525000, rate: 0 },
+            { min: 525000, max: 675000, rate: 0.10 },
+            { min: 675000, max: 1075000, rate: 0.15 },
+            { min: 1075000, max: 1575000, rate: 0.20 },
+            { min: 1575000, max: 3575000, rate: 0.25 },
+            { min: 3575000, max: Infinity, rate: 0.30 }
+        ]
+    },
+    '2024-25': {
+        male: [
+            { min: 0, max: 350000, rate: 0 },
+            { min: 350000, max: 450000, rate: 0.05 },
+            { min: 450000, max: 850000, rate: 0.10 },
+            { min: 850000, max: 1350000, rate: 0.15 },
+            { min: 1350000, max: 1850000, rate: 0.20 },
+            { min: 1850000, max: 3850000, rate: 0.25 },
+            { min: 3850000, max: Infinity, rate: 0.30 }
+        ],
+        female: [
+            { min: 0, max: 400000, rate: 0 },
+            { min: 400000, max: 500000, rate: 0.05 },
+            { min: 500000, max: 900000, rate: 0.10 },
+            { min: 900000, max: 1400000, rate: 0.15 },
+            { min: 1400000, max: 1900000, rate: 0.20 },
+            { min: 1900000, max: 3900000, rate: 0.25 },
+            { min: 3900000, max: Infinity, rate: 0.30 }
+        ],
+        third_gender: [
+            { min: 0, max: 475000, rate: 0 },
+            { min: 475000, max: 575000, rate: 0.05 },
+            { min: 575000, max: 975000, rate: 0.10 },
+            { min: 975000, max: 1475000, rate: 0.15 },
+            { min: 1475000, max: 1975000, rate: 0.20 },
+            { min: 1975000, max: 3975000, rate: 0.25 },
+            { min: 3975000, max: Infinity, rate: 0.30 }
+        ],
+        freedom_fighter: [
+            { min: 0, max: 500000, rate: 0 },
+            { min: 500000, max: 600000, rate: 0.05 },
+            { min: 600000, max: 1000000, rate: 0.10 },
+            { min: 1000000, max: 1500000, rate: 0.15 },
+            { min: 1500000, max: 2000000, rate: 0.20 },
+            { min: 2000000, max: 4000000, rate: 0.25 },
+            { min: 4000000, max: Infinity, rate: 0.30 }
+        ]
+    }
 };
 
 // Get DOM elements
 const monthlySalaryInput = document.getElementById('monthlySalary');
 const categorySelect = document.getElementById('category');
+const incomeYearSelect = document.getElementById('incomeYear');
 const calculateBtn = document.getElementById('calculateBtn');
 const resultsSection = document.getElementById('results');
 // Removed userInvestmentInput as it's replaced by multiple investment types
@@ -48,9 +89,9 @@ const monthlyInputs = document.querySelectorAll('.monthly-salary');
 const investmentTypeCheckboxes = document.querySelectorAll('.investment-type');
 const investmentAmountInputs = document.querySelectorAll('.investment-amount');
 
-// Format currency
+// Format currency with universal taka symbol
 function formatCurrency(amount) {
-    return '৳' + amount.toLocaleString('en-BD');
+    return `<span class="taka-symbol"><span class="taka-icon">৳</span>${amount.toLocaleString('en-US')}</span>`;
 }
 
 // Handle input mode change
@@ -66,6 +107,21 @@ inputModeRadios.forEach(radio => {
     });
 });
 
+// Update year information text
+function updateYearInfo() {
+    const year = incomeYearSelect.value;
+    const yearInfoText = document.getElementById('yearInfoText');
+    
+    if (year === '2025-26') {
+        yearInfoText.textContent = 'Income Year: July 2025 - June 2026';
+    } else if (year === '2024-25') {
+        yearInfoText.textContent = 'Income Year: July 2024 - June 2025';
+    }
+}
+
+// Handle income year change
+incomeYearSelect.addEventListener('change', updateYearInfo);
+
 // Update manual input summary
 function updateManualSummary() {
     let total = 0;
@@ -80,8 +136,8 @@ function updateManualSummary() {
     });
     
     const average = count > 0 ? total / count : 0;
-    document.getElementById('avgMonthly').textContent = formatCurrency(average);
-    document.getElementById('total12Months').textContent = formatCurrency(total);
+    document.getElementById('avgMonthly').innerHTML = formatCurrency(average);
+    document.getElementById('total12Months').innerHTML = formatCurrency(total);
 }
 
 // Add event listeners to manual inputs
@@ -104,8 +160,8 @@ investmentTypeCheckboxes.forEach((checkbox, index) => {
 });
 
 // Calculate tax based on slabs
-function calculateTax(income, category) {
-    const slabs = taxSlabs[category];
+function calculateTax(income, category, year) {
+    const slabs = taxSlabs[year][category];
     let tax = 0;
     let breakdown = [];
     
@@ -132,8 +188,8 @@ function calculateTax(income, category) {
 }
 
 // Create comprehensive tax slab summary table
-function createTaxSlabSummary(category, totalTaxableIncome) {
-    const slabs = taxSlabs[category];
+function createTaxSlabSummary(category, totalTaxableIncome, year) {
+    const slabs = taxSlabs[year][category];
     const summaryDiv = document.getElementById('taxSlabSummary');
     
     let summaryHTML = `
@@ -196,6 +252,7 @@ function createTaxSlabSummary(category, totalTaxableIncome) {
 function calculateTaxDetails() {
     const inputMode = document.querySelector('input[name="inputMode"]:checked').value;
     const category = categorySelect.value;
+    const year = incomeYearSelect.value;
     let totalIncome;
     
     if (inputMode === 'monthly') {
@@ -230,7 +287,7 @@ function calculateTaxDetails() {
     const taxableIncome = (totalIncome * 2) / 3;
     
     // Calculate tax
-    const { totalTax, breakdown } = calculateTax(taxableIncome, category);
+    const { totalTax, breakdown } = calculateTax(taxableIncome, category, year);
     
     // Calculate investment rebate (3% of taxable income, max 10 lac)
     const maxRebate = Math.min(taxableIncome * 0.03, 1000000);
@@ -243,15 +300,18 @@ function calculateTaxDetails() {
     const monthlyTDS = effectiveTax / 12;
     
     // Update UI
-    document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
-    document.getElementById('taxableIncome').textContent = formatCurrency(taxableIncome);
-    document.getElementById('totalTax').textContent = formatCurrency(totalTax);
-    document.getElementById('monthlyTDS').textContent = formatCurrency(monthlyTDS);
-    document.getElementById('maxRebate').textContent = formatCurrency(maxRebate);
-    document.getElementById('minInvestment').textContent = formatCurrency(minInvestment);
+    document.getElementById('totalIncome').innerHTML = formatCurrency(totalIncome);
+    document.getElementById('taxableIncome').innerHTML = formatCurrency(taxableIncome);
+    document.getElementById('totalTax').innerHTML = formatCurrency(totalTax);
+    document.getElementById('monthlyTDS').innerHTML = formatCurrency(monthlyTDS);
+    document.getElementById('maxRebate').innerHTML = formatCurrency(maxRebate);
+    document.getElementById('minInvestment').innerHTML = formatCurrency(minInvestment);
+    
+    // Update annual TDS tooltip
+    document.getElementById('annualTDSTooltip').innerHTML = `Annual TDS: ${formatCurrency(effectiveTax)}`;
     
     // Create comprehensive tax slab summary
-    createTaxSlabSummary(category, taxableIncome);
+    createTaxSlabSummary(category, taxableIncome, year);
     
     // Show results section
     resultsSection.style.display = 'block';
