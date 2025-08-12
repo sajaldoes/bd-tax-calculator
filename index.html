@@ -72,21 +72,22 @@
         }
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 200px;
+            width: 280px;
             background-color: #374151;
             color: white;
             text-align: center;
-            border-radius: 6px;
-            padding: 8px;
+            border-radius: 8px;
+            padding: 12px;
             position: absolute;
             z-index: 1000;
             bottom: 125%;
             left: 50%;
-            margin-left: -100px;
+            margin-left: -140px;
             opacity: 0;
             transition: opacity 0.3s;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: normal;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         .tooltip .tooltiptext::after {
             content: "";
@@ -305,7 +306,7 @@
                         <div class="space-y-3">
                             <div>
                                 <p class="text-sm opacity-90 flex items-center">
-                                    Possible Rebate
+                                    Possible Max Rebate
                                     <i class="fas fa-info-circle ml-2 cursor-help" title="Maximum rebate is 3% of your taxable income, capped at 10 lac BDT. Rebate only applies if calculated tax exceeds 5,000 BDT."></i>
                                 </p>
                                 <p class="text-2xl font-bold currency" id="maxRebate"><span class="taka-symbol"><i class="fa-solid fa-bangladeshi-taka-sign taka-icon"></i>0</span></p>

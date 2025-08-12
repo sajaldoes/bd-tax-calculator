@@ -367,9 +367,11 @@ function calculateTaxDetails() {
     }
     
     // Calculate effective tax after rebate
-    let effectiveTax;
+    let effectiveTax, actualRebateApplied = 0;
     if (totalTax > 5000 && maxRebate > 0) {
         effectiveTax = Math.max(5000, taxAfterMinimum - maxRebate);
+        // Calculate actual rebate applied (difference between tax before and after rebate)
+        actualRebateApplied = taxAfterMinimum - effectiveTax;
     } else {
         effectiveTax = taxAfterMinimum;
     }
@@ -384,8 +386,25 @@ function calculateTaxDetails() {
     document.getElementById('maxRebate').innerHTML = formatCurrency(maxRebate);
     document.getElementById('minInvestment').innerHTML = formatCurrency(minInvestment);
     
-    // Update annual TDS tooltip
-    document.getElementById('annualTDSTooltip').innerHTML = `Annual TDS after rebate: ${formatCurrency(effectiveTax)}`;
+    // Update annual TDS tooltip with detailed rebate information
+    let tooltipContent;
+    if (actualRebateApplied > 0) {
+        tooltipContent = `
+            <div class="text-left">
+                <div class="font-semibold mb-2">Annual TDS Breakdown:</div>
+                <div class="space-y-1 text-sm">
+                    <div>• Total Tax: ${formatCurrency(taxAfterMinimum)}</div>
+                    <div>• Rebate Applied: ${formatCurrency(actualRebateApplied)}</div>
+                    <div class="border-t border-gray-500 pt-1 mt-1">
+                        <div class="font-medium">• Final TDS: ${formatCurrency(effectiveTax)}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        tooltipContent = `Annual TDS: ${formatCurrency(effectiveTax)}`;
+    }
+    document.getElementById('annualTDSTooltip').innerHTML = tooltipContent;
     
     // Create comprehensive tax slab summary (show actual calculated tax, not minimum tax)
     createTaxSlabSummary(category, taxableIncome, year, totalTax);
