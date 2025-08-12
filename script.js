@@ -206,7 +206,7 @@ function calculateTax(income, category, year) {
 }
 
 // Create enhanced tax slab summary table with visuals
-function createTaxSlabSummary(category, totalTaxableIncome, year) {
+function createTaxSlabSummary(category, totalTaxableIncome, year, taxAfterMinimum = null) {
     const slabs = taxSlabs[year][category];
     const summaryDiv = document.getElementById('taxSlabSummary');
     
@@ -278,8 +278,8 @@ function createTaxSlabSummary(category, totalTaxableIncome, year) {
         `;
     });
     
-    // Calculate total tax
-    const totalTax = slabs.reduce((total, slab) => {
+    // Calculate total tax from slabs
+    const calculatedTax = slabs.reduce((total, slab) => {
         if (totalTaxableIncome > slab.min) {
             const eligibleAmount = Math.min(totalTaxableIncome - slab.min, slab.max - slab.min);
             return total + (eligibleAmount * slab.rate);
@@ -287,15 +287,18 @@ function createTaxSlabSummary(category, totalTaxableIncome, year) {
         return total;
     }, 0);
     
+    // Use the tax after minimum if provided, otherwise use calculated tax
+    const displayTax = taxAfterMinimum !== null ? taxAfterMinimum : calculatedTax;
+    
     summaryHTML += `
                 </tbody>
                 <tfoot>
                     <tr class="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
                         <td colspan="3" class="px-6 py-4 text-lg font-bold">
                             <i class="fas fa-calculator mr-2"></i>
-                            Total Annual Tax (without rebate)
+                            Total Annual Tax (from tax slabs)
                         </td>
-                        <td class="px-6 py-4 text-right text-xl font-bold">${formatCurrency(totalTax)}</td>
+                        <td class="px-6 py-4 text-right text-xl font-bold">${formatCurrency(displayTax)}</td>
                         <td class="px-6 py-4 text-center">
                         </td>
                     </tr>
@@ -347,31 +350,45 @@ function calculateTaxDetails() {
     const taxableIncome = (totalIncome * 2) / 3;
     
     // Calculate tax
-    const { totalTax, breakdown } = calculateTax(taxableIncome, category, year);
+    const { totalTax } = calculateTax(taxableIncome, category, year);
     
-    // Calculate investment rebate (3% of taxable income, max 10 lac)
-    const maxRebate = Math.min(taxableIncome * 0.03, 1000000);
+    // Apply minimum tax of 5000 if tax > 0
+    const taxAfterMinimum = totalTax > 0 ? Math.max(5000, totalTax) : 0;
     
-    // Calculate minimum investment (amount whose 15% equals max rebate)
-    const minInvestment = maxRebate / 0.15;
+    // Calculate investment rebate - only if calculated tax is greater than 5000
+    let maxRebate, minInvestment;
+    if (totalTax > 5000) {
+        maxRebate = Math.min(taxableIncome * 0.03, 1000000);
+        minInvestment = maxRebate / 0.15;
+    } else {
+        // No rebate possible if calculated tax <= 5000
+        maxRebate = 0;
+        minInvestment = 0;
+    }
     
-    // Calculate monthly TDS (Total Tax - Rebate) / 12
-    const effectiveTax = Math.max(0, totalTax - maxRebate);
+    // Calculate effective tax after rebate
+    let effectiveTax;
+    if (totalTax > 5000 && maxRebate > 0) {
+        effectiveTax = Math.max(5000, taxAfterMinimum - maxRebate);
+    } else {
+        effectiveTax = taxAfterMinimum;
+    }
+    
     const monthlyTDS = effectiveTax / 12;
     
     // Update UI
     document.getElementById('totalIncome').innerHTML = formatCurrency(totalIncome);
     document.getElementById('taxableIncome').innerHTML = formatCurrency(taxableIncome);
-    document.getElementById('totalTax').innerHTML = formatCurrency(totalTax);
+    document.getElementById('totalTax').innerHTML = formatCurrency(taxAfterMinimum);
     document.getElementById('monthlyTDS').innerHTML = formatCurrency(monthlyTDS);
     document.getElementById('maxRebate').innerHTML = formatCurrency(maxRebate);
     document.getElementById('minInvestment').innerHTML = formatCurrency(minInvestment);
     
     // Update annual TDS tooltip
-    document.getElementById('annualTDSTooltip').innerHTML = `Annual TDS: ${formatCurrency(effectiveTax)}`;
+    document.getElementById('annualTDSTooltip').innerHTML = `Annual TDS after rebate: ${formatCurrency(effectiveTax)}`;
     
-    // Create comprehensive tax slab summary
-    createTaxSlabSummary(category, taxableIncome, year);
+    // Create comprehensive tax slab summary (show actual calculated tax, not minimum tax)
+    createTaxSlabSummary(category, taxableIncome, year, totalTax);
     
     // Show results section
     resultsSection.style.display = 'block';
@@ -381,15 +398,36 @@ function calculateTaxDetails() {
     
     // Store values for investment check
     window.currentMaxRebate = maxRebate;
+    window.currentCalculatedTax = totalTax;
 }
 
 // Check investment function with multiple types
 function checkInvestment() {
     const investmentResult = document.getElementById('investmentResult');
     const maxRebate = window.currentMaxRebate;
+    const calculatedTax = window.currentCalculatedTax;
     
-    if (!maxRebate) {
+    if (maxRebate === undefined) {
         alert('Please calculate your tax first');
+        return;
+    }
+    
+    if (calculatedTax <= 5000) {
+        investmentResult.innerHTML = `
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-yellow-600 mr-3"></i>
+                    <div>
+                        <h6 class="font-semibold text-yellow-800">No Investment Rebate Applicable</h6>
+                        <p class="text-yellow-700 text-sm mt-1">
+                            Your calculated tax (${formatCurrency(calculatedTax)}) is subject to minimum tax rule. 
+                            Investment rebates only apply when calculated tax exceeds 5,000 BDT.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        investmentResult.style.display = 'block';
         return;
     }
     
@@ -536,7 +574,28 @@ investmentAmountInputs.forEach(input => {
     });
 });
 
+// Load cached salary from localStorage
+function loadCachedSalary() {
+    const cachedSalary = localStorage.getItem('monthlySalary');
+    if (cachedSalary && cachedSalary !== '50000') {
+        monthlySalaryInput.value = cachedSalary;
+    }
+}
+
+// Save salary to localStorage
+function saveSalary() {
+    const salary = monthlySalaryInput.value;
+    if (salary) {
+        localStorage.setItem('monthlySalary', salary);
+    }
+}
+
+// Add event listener to save salary when it changes
+monthlySalaryInput.addEventListener('blur', saveSalary);
+monthlySalaryInput.addEventListener('input', saveSalary);
+
 // Initialize manual month labels on page load
 document.addEventListener('DOMContentLoaded', () => {
     updateYearInfo();
+    loadCachedSalary();
 });

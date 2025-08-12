@@ -159,7 +159,7 @@
                         </label>
                         <input type="number" id="monthlySalary" 
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-lg"
-                               placeholder="Enter your monthly salary" min="0">
+                               placeholder="Enter your monthly salary" min="0" value="50000">
                     </div>
                 </div>
                 
@@ -306,7 +306,7 @@
                             <div>
                                 <p class="text-sm opacity-90 flex items-center">
                                     Possible Rebate
-                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Maximum rebate is 3% of your taxable income, capped at 10 lac BDT. This rebate reduces your final tax liability."></i>
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Maximum rebate is 3% of your taxable income, capped at 10 lac BDT. Rebate only applies if calculated tax exceeds 5,000 BDT."></i>
                                 </p>
                                 <p class="text-2xl font-bold currency" id="maxRebate"><span class="taka-symbol"><i class="fa-solid fa-bangladeshi-taka-sign taka-icon"></i>0</span></p>
                             </div>
@@ -330,14 +330,14 @@
                             <div>
                                 <p class="text-sm opacity-90 flex items-center">
                                     Total Tax
-                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Total annual tax before applying any investment rebates."></i>
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Total annual tax with minimum tax rule applied (minimum 5,000 BDT if any tax is owed) before investment rebates."></i>
                                 </p>
                                 <p class="text-2xl font-bold currency" id="totalTax"><span class="taka-symbol"><i class="fa-solid fa-bangladeshi-taka-sign taka-icon"></i>0</span></p>
                             </div>
                             <div class="bg-white/20 rounded-lg p-2">
                                 <p class="text-sm opacity-90 flex items-center">
                                     Monthly TDS
-                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Monthly Tax Deducted at Source = (Total Tax - Investment Rebate) ÷ 12 months."></i>
+                                    <i class="fas fa-info-circle ml-2 cursor-help" title="Monthly Tax Deducted at Source = Annual TDS after rebate ÷ 12 months."></i>
                                 </p>
                                 <div class="tooltip">
                                     <p class="text-2xl font-bold currency" id="monthlyTDS"><span class="taka-symbol"><i class="fa-solid fa-bangladeshi-taka-sign taka-icon"></i>0</span></p>
